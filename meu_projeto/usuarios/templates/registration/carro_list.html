@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Carros{% endblock %}
+
+{% block extracss %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/carro_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="rounded bg-white shadow-sm p-4">
+        <h1 class="mb-4">Carros Cadastrados</h1>
+        <a href="{% url 'carro_create' %}" class="btn btn-primary mb-4">Adicionar Carro</a>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Ano</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for carro in carros %}
+                    <tr>
+                        <td>{{ carro.marca }}</td>
+                        <td>{{ carro.modelo }}</td>
+                        <td>{{ carro.ano }}</td>
+                        <td>
+                            <a href="{% url 'carro_update' carro.id %}" class="btn btn-info">Editar</a>
+                            <a href="{% url 'carro_delete' carro.id %}" class="btn btn-danger">Deletar</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">Nenhum carro cadastrado ainda.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

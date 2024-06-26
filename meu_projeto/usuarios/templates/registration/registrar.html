@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrar - Meu Projeto Django{% endblock %}
+
+{% block extracss %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/registrar.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Registrar</h1>
+
+        <form method="post" class="register-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-register">Registrar</button>
+        </form>
+
+        <p class="login-link">Já possui uma conta? <a href="{% url 'login' %}">Faça login aqui</a>.</p>
+    </div>
+{% endblock %}
